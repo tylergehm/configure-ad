@@ -1,9 +1,13 @@
-<p align="center">
-<img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
+  <img src="https://raw.githubusercontent.com/tylergehm/configure-ad/main/az1.jpg" alt="GitHub banner" style="max-width:100%;height:auto;" />
 </p>
 
 <h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
-This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines.<br />
+Microsoft Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. It acts as a centralized database that stores and manages information about network resources, such as users, computers, printers, and groups. AD allows administrators to organize, secure, and control access to these resources through policies and authentication. Users log in once with their credentials to access permitted resources across the network, making it easier to manage large organizations efficiently.<br />
+</p>
+In this Azure lab, two virtual machines are deployed: one running Windows Server 2025 configured as the domain controller and another running Windows 11 configured as the client. The domain controller is the central server that manages security authentication and authorization within a Windows domain—it hosts Active Directory, controls user logins, enforces policies, and (in this setup) also runs DNS services. The client is a workstation that joins the domain to access centralized resources and authentication. By default, the Windows 11 VM’s network interface card (NIC) uses Azure’s managed DNS. To enable domain joining, the NIC’s DNS settings are manually changed to point to the private IP address of the Windows Server 2025 VM, allowing the client to resolve the domain name and communicate with the domain controller for authentication and policy application.
+
+</p>
+Active Directory Domain Services (AD DS) is installed on the Windows Server 2025 VM, promoting it to a domain controller for a new forest named mydomain.com—a forest is the top-level container in Active Directory that holds one or more domains, defining the security and replication boundary for the entire directory structure. Next, the Windows 11 client VM joins the mydomain.com domain by using its updated DNS settings to locate the domain controller, enabling centralized authentication and group policy management. Remote Desktop is then configured on the client VM to allow non-administrative domain users to log in remotely. Finally, a PowerShell script automates the creation of additional user accounts in Active Directory, streamlining user provisioning and ensuring consistent setup across the lab environment.
 
 
 <h2>Video Demonstration</h2>
@@ -20,16 +24,19 @@ This tutorial outlines the implementation of on-premises Active Directory within
 <h2>Operating Systems Used </h2>
 
 - Windows Server 2022
-- Windows 10 (21H2)
+- Windows 11 Pro (21H2)
+- Windows 11 Home (Host Machine)
 
-<h2>High-Level Deployment and Configuration Steps</h2>
+<h2>Configuration Steps</h2>
 
-- Step 1
-- Step 2
-- Step 3
-- Step 4
+- Step 1 - Create a Domain Controller Virtual Macine
+- Step 2 - Set Domain Controller VM IP Address to Static
+- Step 3 - Create Client Virtual Machine
+- Step 4 - Set Client VM's DNS settings to Domain Controller's Private IP Address
+- Step 5 - Set up Remote Desktop for non-administrative users on Client VM
+- Step 6 - Create additional users with Powershell Script
 
-<h2>Deployment and Configuration Steps</h2>
+<h2>Deployment and Configuration Process</h2>
 
 <p>
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
