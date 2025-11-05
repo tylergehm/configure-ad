@@ -38,4 +38,4 @@ Active Directory Domain Services (AD DS) is installed on the Windows Server 2025
 
 <h2>Deployment and Configuration Process</h2>
 
-For a detailesd explaination of creating Virtual Machines, please visit the project [Creating Virtual Machines in Azure Portal](https://github.com/tylergehm/vm)
+For a detailed explanation of creating Virtual Machines, please visit the project [Creating Virtual Machines in Azure Portal](https://github.com/tylergehm/vm)
