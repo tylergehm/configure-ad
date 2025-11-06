@@ -33,13 +33,12 @@ Active Directory Domain Services (AD DS) is installed on the Windows Server 2025
 - Step 2 - Create Client Virtual Machine
 - Step 3 - Set Domain Controller VM IP Address to Static
 - Step 4 - Set Client VM's DNS settings to Domain Controller's Private IP Address
-- Step 5 - Set up Remote Desktop for non-administrative users on Client VM
-- Step 6 - Install Active Directory
-- Step 7 - Set up a new forest
-- Step 8 - Create domain admin user
-- Step 9 - Join a client to the domain
-- Step 10 - Set up remote desktop for non-administrative users
-- Step 11 - Create additional users with Powershell Script
+- Step 5 - Install Active Directory
+- Step 6 - Set up a new forest
+- Step 7 - Create domain admin user
+- Step 8 - Join a client to the domain
+- Step 9 - Set up remote desktop for non-administrative users on Client VM
+- Step 10 - Create additional users with Powershell Script
 
 
 <h2>Deployment and Configuration Process</h2>
@@ -104,7 +103,7 @@ Once inside the DC VM, run the program "wf.msc" to open up Windows Firewall. For
 
 Inside Windows Firewall, click on properties and turn the firewall OFF. </p>
 
-<h2>Set Client VM's DNS settings to Domain Controller's Private IP Address</h2>
+<h2>Step 4 - Set Client VM's DNS settings to Domain Controller's Private IP Address</h2>
 
 The DNS settings on the Client Virtual NIC will be set to DC-1's Private IP address. This will allow the DC VM to act as a DNS server for the client VM. </p>
 
@@ -132,6 +131,7 @@ Using Powershell, the client VM successfully pinged the DC VM by using the comma
 
 Next, the command "ipconfig /all" is entered to display information for all network adapters on a Windows system, including IP address, subnet mask, default gateway, DNS servers, MAC address, and DHCP status. The DNS server is displayed as "10.0.1.4", which is the Private IP Address for the Domain Controller. This indicates the the Domain Controller has been successfully configured as the DNS server for the client VM. </p>
 
+<h2>Step 5 - Install Active Directory</h2>
 
 
 
