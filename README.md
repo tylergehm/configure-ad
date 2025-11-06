@@ -1,7 +1,7 @@
   <img src="https://raw.githubusercontent.com/tylergehm/configure-ad/main/az1.jpg" alt="GitHub banner" style="max-width:100%;height:auto;" />
 </p>
 
-<h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
+<h1>Configuring Active Directory within Azure Virtual Machines</h1>
 Microsoft Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. It acts as a centralized database that stores and manages information about network resources, such as users, computers, printers, and groups. AD allows administrators to organize, secure, and control access to these resources through policies and authentication. Users log in once with their credentials to access permitted resources across the network, making it easier to manage large organizations efficiently.<br />
 </p>
 In this Azure lab, two virtual machines are deployed: one running Windows Server 2025 configured as the domain controller and another running Windows 11 configured as the client. The domain controller is the central server that manages security authentication and authorization within a Windows domain—it hosts Active Directory, controls user logins, enforces policies, and (in this setup) also runs DNS services. The client is a workstation that joins the domain to access centralized resources and authentication. By default, the Windows 11 VM’s network interface card (NIC) uses Azure’s managed DNS. To enable domain joining, the NIC’s DNS settings are manually changed to point to the private IP address of the Windows Server 2025 VM, allowing the client to resolve the domain name and communicate with the domain controller for authentication and policy application.
