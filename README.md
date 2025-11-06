@@ -34,7 +34,13 @@ Active Directory Domain Services (AD DS) is installed on the Windows Server 2025
 - Step 3 - Create Client Virtual Machine
 - Step 4 - Set Client VM's DNS settings to Domain Controller's Private IP Address
 - Step 5 - Set up Remote Desktop for non-administrative users on Client VM
-- Step 6 - Create additional users with Powershell Script
+- Step 6 - Install Active Directory
+- Step 7 - Set up a new forest
+- Step 8 - Create domain admin user
+- Step 9 - Join a client to the domain
+- Step 10 - Set up remote desktop for non-administrative users
+- Step 11 - Create additional users with Powershell Script
+
 
 <h2>Deployment and Configuration Process</h2>
 
