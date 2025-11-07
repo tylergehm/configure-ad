@@ -28,7 +28,7 @@ $count = 1
 while ($count -lt $NUMBER_OF_ACCOUNTS_TO_CREATE) {
     $fisrtName = generate-random-name
     $lastName = generate-random-name
-    $username = $firstName + '.' + $lastName
+    $username = $fisrtName + '.' + $lastName
     $password = ConvertTo-SecureString $PASSWORD_FOR_USERS -AsPlainText -Force
 
     Write-Host "Creating user: $($username)" -BackgroundColor Black -ForegroundColor Cyan
