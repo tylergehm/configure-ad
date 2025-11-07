@@ -34,8 +34,8 @@ Active Directory Domain Services (AD DS) is installed on the Windows Server 2025
 - Step 3 - Set Domain Controller VM IP Address to Static
 - Step 4 - Set Client VM's DNS settings to Domain Controller's Private IP Address
 - Step 5 - Install Active Directory
-- Step 6 - Set up a new forest
-- Step 7 - Create domain admin user
+- Step 6 - Set up a new Forest
+- Step 7 - Create domain admin user within the domain
 - Step 8 - Join a client to the domain
 - Step 9 - Set up remote desktop for non-administrative users on Client VM
 - Step 10 - Create additional users with Powershell Script
@@ -159,7 +159,102 @@ In the Confirmation section, check the box to allow "Restart the destination ser
 
 <img width="980" height="699" alt="image" src="https://github.com/user-attachments/assets/ed86eb25-c694-43c9-b113-e6fbc57ecec3" /> </p>
 
-Now that the installation is configured, click "Install" to begin the installation process.
+Now that the installation is configured, click "Install" to begin the installation process. </p>
+
+<img width="975" height="702" alt="image" src="https://github.com/user-attachments/assets/ee59682e-d1ab-4a55-be79-2d815289a35d" /> </p>
+
+The installation of Active Directory Domain Services is now complete. </p>
+
+<h2>Step 6 - Set up a new Forest</h2>
+
+<img width="1884" height="959" alt="image" src="https://github.com/user-attachments/assets/a334f4b2-f8ec-4a89-8dbd-b9cb3889924a" /> </p>
+
+After the installation is complete, return to the Server Manager dashboard and click the notifications button. In the drop down of notifications, click "Promote this server to a Domain Controller". </p>
+
+<img width="939" height="699" alt="image" src="https://github.com/user-attachments/assets/66d29557-465c-448d-b87a-f9aaec47453a" />
+
+Once inside the Configuration Wizard, click the button that says "Add a new forest". In Active Directory, a forest is the top-level container that defines the ultimate security and administrative boundary for one or more domains. It establishes a shared schema, configuration, and global catalog, enabling trust relationships and centralized management across all domains within it—making it the highest logical structure in an AD environment. </p>
+
+For this project, the forest will be named <b>mydomain.com</b>. Once completed, click next to continue. </p>
+
+<img width="941" height="695" alt="image" src="https://github.com/user-attachments/assets/9331b8c4-a0d9-410b-8b28-f555f5702118" /> </p>
+
+In this next section, a password must be entered for Directory Services Restore Mode. The Directory Services Restore Mode (DSRM) password is a local administrator credential set during AD DS promotion that allows you to boot the domain controller into a special recovery mode to repair or restore the Active Directory database (ntds.dit) if it becomes corrupted or needs offline maintenance. It functions independently of domain accounts, ensuring access to the server even when the AD database is unavailable. </p>
+
+Once a password has been entered, click Next. </p>
+
+<img width="937" height="695" alt="image" src="https://github.com/user-attachments/assets/c07da5a2-9344-4521-a61a-c38420a423a9" />
+
+In the DNS Options section, uncheck the box that says "Create DNS Delegation". Unchecking "Create DNS Delegation" during AD DS promotion prevents the new domain controller from attempting to register a delegation record in a parent DNS zone (which doesn’t exist in this isolated Azure lab). Since this is a standalone forest with no upstream DNS server managing a parent zone, creating a delegation would fail or cause unnecessary errors—leaving it unchecked keeps the installation clean and focused on internal DNS resolution within the new domain. </p>
+
+<img width="951" height="698" alt="image" src="https://github.com/user-attachments/assets/35cc319f-48ed-4b3a-9445-dbf0ed1373a9" /> </p>
+
+Next, the NetBIOS name is checked to ensure that it is correct. The NetBIOS name is checked during AD DS promotion to confirm the legacy-compatible identifier (typically the first part of the domain name, like MYDOMAIN) that older systems and applications use for name resolution and authentication. Verifying it ensures compatibility with pre-Windows 2000 clients, avoids conflicts in the network, and prevents errors during domain join or replication. </p>
+
+<img width="1649" height="695" alt="image" src="https://github.com/user-attachments/assets/3b026d22-562e-4f55-b111-ae827c51a4a5" /> </p>
+
+Click next through Paths and Review Options. </p>
+
+<img width="946" height="701" alt="image" src="https://github.com/user-attachments/assets/6aad9579-8e8d-421c-a711-14afe0ae9dbf" /> </p>
+
+Once all prerequisite checks have been passed, click "Install" to begin installation of the forest. </p>
+
+<img width="557" height="672" alt="image" src="https://github.com/user-attachments/assets/d8a44fd7-72d3-416f-9eb4-06be7cc8b610" />
+</p>
+
+After the forest is installed, the DC VM will restart to finish the installation. When logging back in, change the credentials to include the domain now. In this project, the DC login in will now become "mydomain.com\DC-1" instaed of just "DC-1". </p>
+
+<h2>- Step 7 - Create domain admin user within the domain</h2>
+
+<img width="1644" height="906" alt="image" src="https://github.com/user-attachments/assets/9325d624-c315-476b-95e3-818a89c600d1" />
+
+This step of the project begins by opening up "Active Directory Users and Computers" in the DC VM. </p>
+
+<img width="934" height="655" alt="image" src="https://github.com/user-attachments/assets/2666325f-bd11-4f00-8038-131608c72244" />
+
+Right click on the "mydomain.com" directory, go to New, and click on Organizational Unit. An Organizational Unit (OU) in Active Directory is a container object used to organize and group users, computers, groups, or other OUs within a domain for easier management. It allows administrators to apply Group Policy Objects (GPOs) and delegate administrative control at a granular level, rather than applying settings domain-wide. </p>
+
+<img width="1084" height="465" alt="image" src="https://github.com/user-attachments/assets/183e565c-97c7-4fad-a2d5-14ea23381844" /> </p>
+
+Create a new organizational unit for "EMPLOYEES" and for "ADMINS". These are the OUs where the Active Directory Users will be created. </p>
+
+<img width="1050" height="649" alt="image" src="https://github.com/user-attachments/assets/3559573b-a15e-4d44-88aa-15bb53dfb1fc" /> </p>
+
+A new admin user will be created. This will be done by going to the ADMINS OU folder that was just created. Right click inside the folder, go to New, then click on User. </p>
+
+<img width="1081" height="463" alt="image" src="https://github.com/user-attachments/assets/11000b9a-63b0-41b5-b742-8c37c86b1a51" /> </p>
+
+Fill out the forms for the new admin user. In the case of this lab, uncheck the box that says "User must change password at next login". </p>
+
+<img width="942" height="624" alt="image" src="https://github.com/user-attachments/assets/d961a2bf-e5d6-4db0-a82e-da6da0d0cdb8" /> </p>
+
+The new admin user will show up in the ADMINS folder. Right click on the user's name and click on "Properties". 
+
+<img width="1263" height="661" alt="image" src="https://github.com/user-attachments/assets/a538fdea-5473-448e-aeb5-9b2499af0284" /> </p>
+
+Inside of Properties, click on the tab called "Member Of" then click "Add...". Inside the pop up box, add the user to the Domain Admins group. </p>
+
+<img width="506" height="662" alt="image" src="https://github.com/user-attachments/assets/d1a98b28-e360-42e9-928c-55156cd8703c" /> </p>
+
+After filling out the pop-up box, verify that the user has been added to the group and select "Apply". </p>
+
+Once this has been configured, log out of the DC VM remote connection. 
+
+<img width="549" height="668" alt="image" src="https://github.com/user-attachments/assets/d04f7ddb-c9ae-4451-b716-3ec11dbcc088" /> </p>
+
+Now use Remote Desktop Connection to log in to the Jane User Admin account. </p>
+
+<img width="1473" height="531" alt="image" src="https://github.com/user-attachments/assets/730bbfa4-e191-4920-952f-304868686476" /> </p>
+
+The new account was successfully remotely created and connected. This was verified in the Command Prompt with the command "whoami". </p>
+
+<h2>Step 8 - Join a client to the domain</h2>
+
+
+
+
+
+
 
 
 
