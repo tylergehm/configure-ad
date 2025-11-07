@@ -331,6 +331,7 @@ This step will involve using a Powershell script to generate users into the doma
 PowerShell is a powerful scripting language and command-line shell developed by Microsoft, built specifically for system administration and automation on Windows — it allows complex tasks like creating thousands of Active Directory users to be executed efficiently with logic, loops, and integration with AD modules. </p>
 This script automates the creation of up to 1,000 realistic-looking user accounts in Active Directory by generating random first and last names using alternating consonants and vowels (e.g., jad.kim), combining them into a username (e.g., jad.kim), and assigning each a fixed password (Password1). It uses the New-ADUser cmdlet to create enabled accounts with full names, display names, and places them in an OU called _EMPLOYEES at the domain root.  </p>
 
-[Note: This script was created by Josh Madakor for the Information Technology course on the Course Careers learning platform.] </p>
-
+Note: This script was created by Josh Madakor for the Information Technology course on the Course Careers learning platform. </p>
+## Download the script
+[Download User-Generator.ps1](https://github.com/tylergehm/configure-ad/raw/main/Create-ADUsers.ps1)
 
