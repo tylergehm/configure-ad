@@ -250,16 +250,87 @@ The new account was successfully remotely created and connected. This was verifi
 
 <h2>Step 8 - Join a client to the domain</h2>
 
+A computer is called a client in a domain because it joins the domain and relies on the domain controller for centralized authentication, policy enforcement, user profile management, and access to domain resources—acting as a dependent workstation rather than an authority. Unlike the domain controller (which hosts Active Directory and provides services), the client participates in the domain to receive security and configuration instructions, enabling users to log in with domain credentials and access shared resources consistently across the network. </p>
+
+<img width="1867" height="1049" alt="image" src="https://github.com/user-attachments/assets/1c4a7b81-ad57-4a38-ba7a-552444ac34a8" /> </p>
+
+Using the Client VM, log into the VM and right-click on the Start Menu icon. Select "System". </p>
+
+<img width="1250" height="986" alt="image" src="https://github.com/user-attachments/assets/dbe7c105-148c-4227-9d6e-ac2f056ca0b4" />
 
 
+Once inside System, click on the link that says "Domain or Workgroup". </p>
 
+<img width="539" height="565" alt="image" src="https://github.com/user-attachments/assets/b8274e9f-977c-4f51-ae4b-bc7a9381b48f" />
 
+Select the button that says "Change..." </p>
 
+<img width="411" height="473" alt="image" src="https://github.com/user-attachments/assets/e1365503-ddcd-4931-b0f5-7377d5d6ce39" />
 
+Inside the Computer Name/Domain Changes pop up box, select the button that says "Domain" and enter the Domain Address (mydomain.com). Then select "Okay". </p>
 
+<img width="563" height="436" alt="image" src="https://github.com/user-attachments/assets/cfb27afd-0665-4743-99d8-077b31ccccd6" /> </p>
 
+Enter in the Domain Controller authentication credentials. </p>
 
+<img width="367" height="207" alt="image" src="https://github.com/user-attachments/assets/8da01694-150f-41d5-ac05-e64a087af517" /> </p>
 
+The Client VM has successfully joined the Domain; the VM must be restarted to complete the process. </p>
 
+<img width="935" height="651" alt="image" src="https://github.com/user-attachments/assets/0bfb9ba8-8db6-4444-a1d1-8ac4965cd53f" /> </p>
+
+As the Client VM is restarting, return to the DC VM and open up the Active Directory Users and Computers. Once the application has opened, a new OU called "Clients" is created. </p>
+
+<img width="935" height="657" alt="image" src="https://github.com/user-attachments/assets/cd32e68e-5d34-44a6-b89b-62c058443dda" /> </p>
+
+Clicking on the "Computers" folder, Client-1 is now officially joined into the Domain. </p>
+
+<img width="932" height="653" alt="image" src="https://github.com/user-attachments/assets/504058be-a06f-42cd-9d20-6fe6c2d47620" /> </p>
+
+Drag and drop Client-1 into the CLIENTS folder in the domain. </p>
+
+<img width="556" height="681" alt="image" src="https://github.com/user-attachments/assets/123225d1-a663-474b-8960-93f2723349a4" /> </p>
+
+Now, using Remote Desktop Connection, the Client-1 Public IP Address will be used to log in to the Domain as Jane (Admin). This is to verify that the Client-1 VM has joined the Domain.
+
+<img width="1143" height="918" alt="image" src="https://github.com/user-attachments/assets/e8272d58-43a5-4f60-94e4-93610894169b" />
+
+Successfully logged in as Jane using the Client-1 VM.
+
+<h2Step 9 - Set up remote desktop for non-administrative users on Client VM></h2>
+
+In this step, all domain users will be given access to remotely connect into the Client-1 VM. The Client-1 VM currently has Jane logged in, which is appropriate because this account has Administrative privileges to set up RDC access. </p>
+
+<img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/93861306-9311-4a49-b50e-84b5af762993" /> </p>
+
+This process will begin by right-clicking on the Start menu and selecting "System". </p>
+
+<img width="1249" height="990" alt="image" src="https://github.com/user-attachments/assets/a16772ba-9b92-477f-9102-151e7391f378" /> </p>
+
+Scroll down in the About section of System and locate "Remote Desktop", then click on it. </p>
+
+<img width="1261" height="978" alt="image" src="https://github.com/user-attachments/assets/d516b412-659b-4a31-b2a2-784686e2e29f" /> </p>
+
+Next, select "Remote Desktop Users". </p>
+
+<img width="494" height="406" alt="image" src="https://github.com/user-attachments/assets/97be5041-7f70-47d2-b028-6b45a6370ad9" /> </p>
+
+In the Remote Desktop Users pop-up, click on "Add..." </p>
+
+<img width="608" height="309" alt="image" src="https://github.com/user-attachments/assets/69a42bb6-c130-4e56-ba0d-4c97d73447c7" />
+
+Add "Domain Users" in the text box and click "Okay". </p>
+
+<img width="502" height="409" alt="image" src="https://github.com/user-attachments/assets/07826b9b-4787-4ea8-aff5-3bd38d342d83" /> </p>
+
+All Domain Users have now been given access to remotely connect into the computer, the Client-1 VM. </p>
+
+<h2>Step 10 - Create additional users with Powershell Script</h2>
+
+This step will involve using a Powershell script to generate users into the domain. </p>
+PowerShell is a powerful scripting language and command-line shell developed by Microsoft, built specifically for system administration and automation on Windows — it allows complex tasks like creating thousands of Active Directory users to be executed efficiently with logic, loops, and integration with AD modules. </p>
+This script automates the creation of up to 1,000 realistic-looking user accounts in Active Directory by generating random first and last names using alternating consonants and vowels (e.g., jad.kim), combining them into a username (e.g., jad.kim), and assigning each a fixed password (Password1). It uses the New-ADUser cmdlet to create enabled accounts with full names, display names, and places them in an OU called _EMPLOYEES at the domain root.  </p>
+
+[Note: This script was created by Josh Madakor for the Information Technology course on the Course Careers learning platform.] </p>
 
 
