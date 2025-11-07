@@ -133,6 +133,38 @@ Next, the command "ipconfig /all" is entered to display information for all netw
 
 <h2>Step 5 - Install Active Directory</h2>
 
+<img width="1920" height="1078" alt="image" src="https://github.com/user-attachments/assets/2bacc799-421e-4517-a0b7-c5ec49c05656" />
+
+To begin the process, using the Domain Controller VM, click on "Add Roles and Features" in the Dashboard of the Server Manager application. </p>
+
+Server Manager is a Microsoft management console (MMC) tool designed exclusively for Windows Server operating systems because it provides centralized administration of server-specific roles, features, and services—like Active Directory, DNS, DHCP, and Hyper-V—that are not present in client versions such as Windows 11. Installing or running Server Manager on a client OS would serve no purpose, as those systems lack the underlying server infrastructure that Server Manager is designed for. </p>
+
+<img width="1647" height="701" alt="image" src="https://github.com/user-attachments/assets/c8d3f94b-7c86-4d30-b398-b8d4a1effe39" /> </p>
+
+<img width="981" height="695" alt="image" src="https://github.com/user-attachments/assets/da8c964d-8079-4fe2-a01d-a3811ee8b9af" /> </p>
+
+Click next through the installation process, making sure the Privare IP Address for the Domain Controller is correct. In this case it is 10.0.1.4. </p>
+
+<img width="977" height="689" alt="image" src="https://github.com/user-attachments/assets/69661e83-b473-4e1d-ae4c-be48c3c1cc84" /> </p>
+
+In the server roles, select "Active Directory Domain Services". Selecting Active Directory Domain Services (AD DS) in Server Manager installs the core directory service components on the Windows Server, enabling it to function as a domain controller that stores the AD database, handles authentication requests, enforces security policies, and replicates directory data across the domain or forest. </p>
+
+<img width="1650" height="701" alt="image" src="https://github.com/user-attachments/assets/b142274b-ff72-479b-be94-0aaef4ed45ee" /> </p>
+
+Continue to click next through the sections of the installation process. </p>
+
+<img width="974" height="696" alt="image" src="https://github.com/user-attachments/assets/1e2472f5-f940-470c-8de6-1f2b1b830460" /> </p>
+
+In the Confirmation section, check the box to allow "Restart the destination server if required". In the confirmation pop-up box, click "Yes". </p>
+
+<img width="980" height="699" alt="image" src="https://github.com/user-attachments/assets/ed86eb25-c694-43c9-b113-e6fbc57ecec3" /> </p>
+
+Now that the installation is configured, click "Install" to begin the installation process.
+
+
+
+
+
 
 
 
