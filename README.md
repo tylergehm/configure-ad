@@ -12,7 +12,7 @@ Active Directory Domain Services (AD DS) is installed on the Windows Server 2025
 
 <h2>Video Demonstration</h2>
 
-- ### [YouTube: How to Deploy on-premises Active Directory within Azure Compute](https://www.youtube.com)
+- ### [YouTube: Configuring On-Premises Active Directory within Azure Virtual Machines](https://youtu.be/G0eNWoRuSdE))
 
 <h2>Environments and Technologies Used</h2>
 
